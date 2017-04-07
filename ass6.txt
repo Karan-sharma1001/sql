@@ -1,0 +1,44 @@
+1)
+
+create or replace type MARKS_TYPE as object
+(Subject VARCHAR2(25),
+midTermMarks NUMBER(3),
+annualMarks NUMBER(3));
+/
+
+
+create table MYMARKS (marks MARKS_TYPE);
+
+insert into MYMARKS values (MARKS_TYPE('Maths',30,90));
+
+insert into MYMARKS values (MARKS_TYPE('English',40,80));
+
+insert into MYMARKS values (MARKS_TYPE('Science',20,90));
+
+
+select m.marks.midTermMarks , m.marks.annualMarks from mymarks m where m.marks.subject like 'English';
+
+
+==================================================
+2)
+
+create or replace type MARKS_TYPE as object
+(Subject VARCHAR2(25),
+midTermMarks NUMBER(3),
+annualMarks NUMBER(3));
+/
+
+
+create table student (studentName VARCHAR2(25)
+,rollNo NUMBER(3) Primary Key,
+Score MARKS_TYPE
+);
+
+insert into student values ('shivi',36,MARKS_TYPE('Maths',30,90));
+
+insert into student values ('Aish',34,MARKS_TYPE('English',40,80));
+
+insert into student values ('Karan',32,MARKS_TYPE('Science',20,90));
+
+
+select m.marks.midTermMarks , m.marks.annualMarks from mymarks m;
