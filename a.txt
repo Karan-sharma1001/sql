@@ -1,0 +1,819 @@
+ declare
+ a number:=&m;
+ begin
+ for i in 1..12 loop
+ if(i=a)
+ then
+ dbms_output.put_line(to_date(a,'Mon'));
+ end if;
+end loop;
+end;
+/
+
+
+
+-----------------------------
+declare
+ a number:=&m;
+ begin
+case a
+when 1 then
+dbms_output.put_line('January');
+when 2 then
+dbms_output.put_line('February');
+when 3 then
+dbms_output.put_line('March');
+when 4 then
+dbms_output.put_line('April');
+when 5 then
+dbms_output.put_line('May');
+when 6 then
+dbms_output.put_line('June');
+when 7 then
+dbms_output.put_line('July');
+when 8 then
+dbms_output.put_line('August');
+when 9 then
+dbms_output.put_line('September');
+when 10 then
+dbms_output.put_line('Octomber');
+when 11 then
+dbms_output.put_line('November');
+when 12 then
+dbms_output.put_line('december');
+end case;
+end;
+
+
+
+declare
+ a number:=&m;
+ begin
+case a
+when 1 then
+dbms_output.put_line('January');
+when 2 then
+dbms_output.put_line('February');
+when 3 then
+dbms_output.put_line('March');
+when 4 then
+dbms_output.put_line('April');
+when 5 then
+dbms_output.put_line('May');
+when 6 then
+dbms_output.put_line('June');
+when 7 then
+dbms_output.put_line('July');
+when 8 then
+dbms_output.put_line('August');
+when 9 then
+dbms_output.put_line('September');
+when 10 then
+dbms_output.put_line('Octomber');
+when 11 then
+dbms_output.put_line('November');
+when 12 then
+dbms_output.put_line('december');
+end case;
+end;
+
+
+ declare
+ cursor c is select * from emp;
+ c1 c%rowtype;
+ begin
+ open c;
+ for i in 1..10
+ loop
+ fetch c into c1;
+ dbms_output.put_line('ename     '||lower(c1.ename));
+ end loop;
+ close c;
+ end;
+ /
+
+
+-------------------------------------------------
+declare
+ cursor c is select * from emp;
+ c1 c%rowtype;
+ begin
+ open c;
+ loop
+ fetch c into c1;
+exit when c%notfound;
+ dbms_output.put_line('ename     '||lower(c1.ename));
+ end loop;
+dbms_output.put_line('rowtype notfound');
+close c;
+
+open c;
+loop
+ fetch c into c1;
+exit when c%found;
+ dbms_output.put_line('ename     '||lower(c1.ename));
+ end loop;
+dbms_output.put_line('rowtype found');
+if (c%isopen)
+then
+ close c;
+ end if;
+end;
+ /
+-------------------------------------------------------------------
+PARAMETER CURSOR
+
+declare
+ cursor c(p number) is select * from emp where deptno=p;
+ c1 c%rowtype;
+ begin
+ open c(10);
+dbms_output.put_line('For 10');
+ loop
+ fetch c into c1;
+exit when c%notfound;
+ dbms_output.put_line('ename     '||lower(c1.ename));
+ end loop;
+dbms_output.put_line('rowtype notfound');
+close c;
+
+open c(20);
+dbms_output.put_line('For 20');
+loop
+ fetch c into c1;
+exit when c%notfound;
+ dbms_output.put_line('ename     '||lower(c1.ename));
+ end loop;
+dbms_output.put_line('rowtype found');
+if (c%isopen)
+then
+ close c;
+ end if;
+end;
+ /
+--------------------------------------------------------------------
+
+declare
+ cursor c(p number) is select * from emp where deptno=p;
+  begin
+dbms_output.put_line('For 10');
+for c1 in c(10)
+loop
+dbms_output.put_line('ename  '||c1.ename||'   '||c1.deptno);
+end loop;
+for c1 in c(20)
+loop
+dbms_output.put_line('ename  '||c1.ename||c1.deptno);
+end loop;
+for c1 in c(30)
+loop
+dbms_output.put_line('ename  '||c1.ename||c1.deptno);
+end loop;
+end;
+--------------------------------------------------------------------
+
+
+declare
+cursor c_emp is select * from emp for update of sal;
+
+begin
+
+for v_emp in c_emp
+loop
+if v_emp.deptno=10 then
+update emp set sal=sal*1.3 where current of c_emp;
+dbms_output.put_line('for 10  '||v_emp.sal);
+
+elsif v_emp.deptno=20 then
+update emp set sal=sal*1.2 where current of c_emp;
+dbms_output.put_line('for 20  '||v_emp.sal);
+elsif v_emp.deptno=30 then
+update emp set sal=sal*1.1 where current of c_emp;
+dbms_output.put_line('for 30  '||v_emp.sal);
+end if;
+end loop;
+end;
+=================================
+EXCEPTION
+=====================================
+declare
+ a number;
+ begin
+ a:=10/0;
+exception
+when zero_divide
+ then
+ dbms_output.put_line('Jyada hushar mat ban re');
+end;
+/
+===================================================
+
+declare
+ sal1 emp.sal%type;
+ begin
+ select sal into sal1 from emp where empno=1;
+exception
+when no_data_found
+ then
+ dbms_output.put_line('empno id not found');
+end;
+/
+========================================================
+declare
+ a number(2);
+ begin
+ a:=100000;
+exception
+when others
+ then
+ dbms_output.put_line('exception raised');
+end;
+/
+=======================================================
+declare
+cursor c_emp is select * from emp for update;
+
+begin
+
+close c_emp;
+exception 
+when invalid_cursor
+then
+dbms_output.put_line('cursor not open yet');
+
+end;
+==================================================
+
+declare
+cursor c_emp is select * from emp for update;
+a number;
+begin
+a:=100000/0;
+close c_emp;
+exception 
+when invalid_cursor or zero_divide
+then
+dbms_output.put_line('invalid please chk program');
+
+end;
+=====================================================
+begin
+ 	declare 
+	vas number(3):=10000;
+	z number;
+	begin
+	select sal into z from emp;
+	z:=10/0;
+	end;
+exception
+when no_data_found or value_error then
+dbms_output.put_line('not found');
+when too_many_rows then
+dbms_output.put_line('TOO MANY ROWS');
+when others then
+dbms_output.put_line('Exception raised');
+end;
+============================================================
+
+declare
+deptno_in number;
+still_have_employees EXCEPTION;
+PRAGMA EXCEPTION_INIT(still_have_employees, -2292);
+BEGIN
+deptno_in := &deptno;
+DELETE FROM DEPT WHERE deptno = deptno_in;
+EXCEPTION WHEN still_have_employees THEN
+DBMS_OUTPUT.PUT_LINE('Please delete employees in dept first');
+ROLLBACK;
+-- RAISE; /* Re-raise the current exception. */
+END;
+========================================================
+
+
+declare 
+	vas number(3);
+	z number;
+
+begin
+begin
+vas:=10000;
+exception
+when value_error then
+dbms_output.put_line('value error');
+end;
+z:=10/0;
+
+exception
+
+when zero_divide
+ then
+ dbms_output.put_line('Jyada hushar mat ban re');
+end;
+/
+
+
+
+==========================================================
+
+
+declare 
+mar exception;
+m1 number;
+begin
+m1:=&marks;
+if m1>100 then
+raise mar;
+end if;
+dbms_output.put_line('not error value is  '||m1);
+exception
+when mar then
+dbms_output.put_line('enter proper value');
+end;
+
+=====================================================
+
+1
+SQL> create or replace procedure p1 as
+  2  begin
+  3  dbms_output.put_line('Hello World');
+  4  end;
+  5  /
+
+Procedure created.
+
+SQL> execute p1;
+Hello World
+
+PL/SQL procedure successfully completed.
+
+SQL> begin 
+  2  p1;
+  3  end;
+  4  /
+Hello World
+
+
+============================================
+create or replace package emp_i as
+ procedure getinfo(p_empno emp.empno%type);
+function getsal(p_empno emp.empno%type) return number;
+end;
+/
+
+create or replace package body emp_i as
+
+ procedure getinfo(p_empno emp.empno%type) as
+
+v_name emp.ename%type;
+
+begin
+
+select ename into v_name from emp where empno=p_empno;
+dbms_output.put_line('from getinfo ' || v_name);
+exception
+when no_data_found then
+dbms_output.put_line('invalid empno');
+end;
+
+function getsal(p_empno emp.empno%type) return number as
+v_sal emp.sal%type;
+begin
+select sal into v_sal from emp where empno=p_empno;
+dbms_output.put_line('from getsal ' || v_sal);
+return v_sal;
+exception
+when no_data_found then
+dbms_output.put_line('invalid empno');
+end;
+end;
+/
+
+
+=============================================================================
+
+
+create or replace package emp_i as
+g_var number;
+procedure glo;
+
+
+ procedure getinfo(p_empno emp.empno%type);
+function getsal(p_empno emp.empno%type) return number;
+end;
+/
+
+create or replace package body emp_i as
+pri_var number:=10;
+
+ procedure getinfo(p_empno emp.empno%type) as
+
+v_name emp.ename%type;
+
+begin
+
+select ename into v_name from emp where empno=p_empno;
+dbms_output.put_line('from getinfo ' || v_name);
+exception
+when no_data_found then
+dbms_output.put_line('invalid empno');
+end;
+
+function getsal(p_empno emp.empno%type) return number as
+v_sal emp.sal%type;
+begin
+select sal into v_sal from emp where empno=p_empno;
+dbms_output.put_line('from getsal ' || v_sal);
+return v_sal;
+exception
+when no_data_found then
+dbms_output.put_line('invalid empno');
+end;
+
+procedure glo as
+begin
+dbms_output.put_line('The global value is '||g_var);
+end;
+
+
+
+begin
+dbms_output.put_line('Initialization');
+g_var:=100;
+end;
+
+
+/
+
+=====================================================================================
+
+create or replace package op as
+function add(v1 number,v2 number) return number;
+function add(v1 number,v2 number,v3 number) return number;
+
+end;
+/
+
+create or replace package body op as
+function add(v1 number,v2 number) return number as
+r number;
+begin
+r:=v1+v2;
+dbms_output.put_line(' Inside func Result of 2 para is  '||r);
+return r;
+end;
+
+
+function add(v1 number,v2 number,v3 number) return number as
+r number;
+begin
+r:=v1+v2+v3;
+dbms_output.put_line('  Inside func Result of 3 para is  '||r);
+return r;
+end;
+
+
+end;
+/
+
+
+declare 
+a number;
+begin
+a:=op.add(10,20);
+dbms_output.put_line('Result of 2 para is  '||a);
+a:=op.add(10,20,30);
+dbms_output.put_line('Result of 3 para is  '||a);
+end;
+=====================================================
+
+create or replace procedure HIRE_EMP  as
+a boolean;
+begin
+a:=true;
+if a then
+dbms_output.put_line('The Employee Already Exists');
+end if;
+end;
+
+
+=====================================================================
+
+TYPE
+
+create or replace type a_add as object
+(street varchar2(20),state varchar2(20),country varchar2(20));
+
+
+
+create table person(pid number, address a_add);
+
+
+insert into person values(1, a_add('Hinjewadi','Pune','India'));
+insert into person values(2, a_add('kokane chowk','Pune','India'));
+insert into person values(3, a_add('Dahanukar','Pune','India'));
+
+
+
+update person set address = a_add('Bavdhan','pune','India');
+
+
+declare 
+add a_add;
+begin 
+add:=a_add('aaa','aaa','aaa');
+
+update person set address = add where pid=2;
+end;
+============================================================================
+
+create or replace type a_add as object
+(street varchar2(20),city varchar2(20),country varchar2(20), member function getcity return varchar2);
+/
+
+create  type body  a_add as
+ member function getcity return varchar2 is
+begin
+return city;
+end;
+end;
+/
+
+
+
+create table person1(pid number, address a_add);
+
+
+insert into person1 values(1, a_add('Hinjewadi','Pune','India'));
+insert into person1 values(2, a_add('kokane chowk','Pune','India'));
+insert into person1 values(3, a_add('Dahanukar','Pune','India'));
+
+
+
+update person1 set address = a_add('Bavdhan','pune','India');
+
+
+declare 
+add a_add;
+begin 
+add:=a_add('aaa','aaa','aaa');
+
+update person set address = add where pid=2;
+end;
+
+=====================================================================================
+
+create type phone_no1 as varray(5) of number;
+/
+
+create table emp_v (empid number, name varchar2(20),phone phone_no1);
+/
+
+insert into emp_v values(1,'aaa',phone_no(123,345,567));
+insert into emp_v values(2,'faa',phone_no(13,45,57));
+insert into emp_v values(3,'daa',phone_no(12,34,56));
+insert into emp_v values(4,'saa',phone_no(23,45,67));
+
+
+
+
+
+/
+
+declare 
+t phone_no;
+begin
+select phone into t from emp_v where empid=1;
+
+for x in 1..t.count 
+loop
+dbms_output.put_line('phone no is = '||t(x));
+end loop;
+dbms_output.put_line('first phone no is = '||t(t.first));
+dbms_output.put_line('last phone no is = '||t(t.last));
+dbms_output.put_line(' second phone no is = '||t(t.next(t.first)));
+end;
+/
+
+=====================================
+create type abc1 as object(data1 varchar2(20),data2 varchar2(20));
+/
+
+create type phone_no1 as varray(5) of abc1;
+/
+
+create table emp_v11(empid number, ename varchar2(20),phone phone_no1);
+/
+
+insert into emp_v11 values(1, 'aaa' , phone_no1(abc1('aaa','bbb'),abc1('aaa','bbb'),abc1('aaa','bbb') ));
+
+insert into emp_v11 values(2,'BBBaaa',phone_no1(abc1('XDa','bXX'),abc1('aAa','AAb'),abc1('aAa','bbA')));
+/
+
+select * from emp_v11 where empid=1;
+/
+
+declare
+t phone_no1;
+cursor c1  is select * from emp_v11;
+begin
+for y in c1
+loop
+select phone into t from emp_v11 where empid=y.empid;
+for x in 1..t.count
+loop
+dbms_output.put_line('Phone no daat1= '||t(x).data1||'Phone no data2= '||t(x).data2);
+end loop;
+end loop;
+end;
+/
+
+===================================================
+
+create or replace  procedure forinsert(empno number, v_phone phone_no1) as
+begin
+insert into emp_v1 values(3,'zzz',v_phone);
+end;
+/
+
+create or replace procedure forupdate (p_empno number, v_phone phone_no1) as
+begin
+update emp_v1 set phone=v_phone where empid=p_empno;
+end;
+/
+
+declare
+t phone_no1;
+begin
+t:=phone_no1(abc1('qqq','qqqq'),abc1('www','wwww'));
+forupdate(1,t);
+end;
+/
+=============================================================
+
+
+create or replace procedure formodify(p_empid number,p_phone in out phone_no1) as
+var number;
+begin
+var:=p_phone.count;
+p_phone.extend(1);
+p_phone(var+1):=abc1('ademo','bdemo');
+update emp_v1 set phone=p_phone where empid=p_empid;
+dbms_output.put_line('DONE');
+end;
+/
+
+declare
+t_phone phone_no1;
+begin
+select phone into t_phone from emp_v1 where empid=1;
+formodify(1,t_phone);
+end;
+/
+
+
+======================================================================
+
+create type vehicle as object(vid number,vname varchar2(20));
+/
+
+create type vehicle_tab as table of vehicle;
+/
+
+create table perosn_data(pid number,pname varchar2(20),vehicle_details vehicle_tab)
+nested table vehicle_details store as vehicle_details_tab;
+/
+
+insert into perosn_data values(1,'Karan',Vehicle_tab(vehicle(1,'alto'),vehicle(2,'Ninja'),vehicle(3,'Hayabusa')));
+
+insert into perosn_data values(2,'SHIVI',Vehicle_tab(vehicle(1,'Pleasure'),vehicle(2,'Activa'),vehicle(3,'APRILLIA')));
+
+
+
+======================================================================================
+
+
+declare 
+new_vehicle vehicle_tab;
+begin
+new_vehicle:=vehicle_tab(vehicle(1,'first vehicle'),vehicle(2,'second vehicle'),vehicle(3,'third vehicle'));
+update perosn_data set vehicle_details=new_vehicle where pid=1;
+dbms_output.put_line('Updated');
+end;
+/
+
+
+declare
+cursor get_data is select pname,vehicle_details from perosn_data;
+l_name perosn_data.pname%type;
+l_vehicle perosn_data.vehicle_details%type;
+
+begin
+open get_data;
+loop
+fetch get_data into l_name,l_vehicle;
+exit when get_data%notfound;
+dbms_output.put_line('Person name is '||l_name||' and vehicles are ');
+for x in 1..l_vehicle.count
+loop
+dbms_output.put_line(l_vehicle(x).vname);
+end loop;
+end loop;
+end;
+
+
+================================================================================
+
+update the (select vehicle_details from perosn_data where pid=2)
+set vname='new_scooty' where vid=2;
+
+
+update the (select vehicle_details from perosn_data where pid=2)
+set vname='new_scooty' where vid=2;
+
+insert into the (select vehicle_details from perosn_data where pid=2)
+values(12,'Kinetic');
+
+
+
+
+delete from  the (select vehicle_details from perosn_data where pid=2) where vid=1;
+
+
+
+============================================================================================
+
+TRIGGER
+
+create or replace trigger tr_update after update on emp
+for each row
+begin
+dbms_output.put_line('Table emp is updated');
+end;
+/
+
+update emp set sal=sal+1000 where empno=7900;
+===========================================
+
+create or replace trigger tr_update after update  or insert or delete on emp
+for each row
+begin
+if inserting then
+
+dbms_output.put_line('Table emp is Inserted');
+elsif updating then
+dbms_output.put_line('Table emp is Updated');
+elsif deleting then
+dbms_output.put_line('Table emp is Deleted');
+end if;
+end;
+/
+=======================================================
+
+
+
+create or replace trigger tr_new  after update on emp
+for each row
+begin
+insert into sal_details values(:old.empno,:new.sal);
+dbms_output.put_line('Added in sal_details');
+end;
+=========================================
+
+
+
+create or replace trigger tr_new  after update on emp
+for each row
+when (old.sal<>new.sal)
+begin
+insert into sal_details values(:old.empno,:new.sal);
+dbms_output.put_line('Added in sal_details');
+end;
+
+
+
+
+drop trigger tr_new
+===============================================
+create or replace procedure ref_demo(c1 out sys_refcursor)
+as
+begin
+open c1 for select ename,sal from emp;
+end;
+/
+
+declare a sys_refcursor;
+l_name emp.ename%type;
+l_sal emp.sal%type;
+begin
+ref_demo(a);
+loop
+fetch a into l_name,l_sal;
+exit when a%notfound;
+dbms_output.put_line('name= '||l_name||'   sal=   '||l_sal);
+end loop;
+end;
+/
+
+
+
+
