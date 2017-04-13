@@ -1,0 +1,184 @@
+public class demo1
+{
+	public static void main( String a[ ])
+	{
+	  int n1=Integer.ParseInt(a[0]);
+		for (int i = 0; i < a[0]; i++) {
+
+		if (i % 2 == 0)
+ 		System.out.println(i);
+		} 
+	
+	
+	}	
+	
+	
+	}
+
+
+
+===================================================
+2.	Create an array of integers by reading values from the user. Display the sum and average of the integers. Also, display the number of values less than the average.
+
+import java.util.*;
+public class Demo1 {
+	//a is an array of string type i.e a reference
+	public static void main(String args[ ] )
+	{
+		Scanner s=new Scanner(System.in);
+
+	    System.out.println("enter number of elements");
+
+	    int n=s.nextInt();
+
+	    int arr[]=new int[n];
+
+	    System.out.println("enter elements");
+
+	    for(int i=0;i<n;i++){//for reading array
+	        arr[i]=s.nextInt();
+
+	    }
+	    int avg=0;
+	    for(int i=0;i<n;i++){ //for printing array
+	    	
+	    	avg=avg+arr[i];
+	        
+
+	    }
+	    avg=avg/n;
+	    System.out.println("average is "+avg);
+	    for (int i = 0; i < n; i++) {
+	    	if (avg>arr[i])
+	    		System.out.println(arr[i]);
+		}
+	    
+	    
+	}
+
+	}
+=====================================================================
+
+3.	Write a program that accepts two numbers and a operator like (+,-,*, /) as command line arguments and perform the appropriate operation indicated by the operator. 
+
+
+
+
+
+
+
+
+import java.util.*;
+public class Demo1 {
+	//a is an array of string type i.e a reference
+	public static void main(String args[ ] )
+	{
+		args[0]="10";
+		args[1]="10";
+		args[2]="*";
+		int n1=Integer.parseInt(args[0]);
+		int n2=Integer.parseInt(args[1]);
+		char str = args[2].charAt(0);
+	    System.out.println("Starts Case");
+	    switch(str) {
+	    case '*': int mul =  n1 * n2;
+	    System.out.println(mul);
+	          break;
+	    case '+': int sum = n1 + n2;
+	    System.out.println(sum);
+	    break; 
+	    case '-': int minus = n1 - n2;
+	    System.out.println(minus);
+	    break; 
+	    case '/': int div = n1 / n2;
+	    System.out.println(div);
+	    break;
+	     default:System.out.println("Invalid input");
+	    }
+	   
+	  
+	}
+
+	}
+===================================================
+
+
+class Demo1{
+	static void reverseEachWordOfString(String inputString)
+    {
+        String[] words = inputString.split(" ");
+         
+        String reverseString = "";
+         
+        for (int i = 0; i < words.length; i++) 
+        {
+            String word = words[i];
+             
+            String reverseWord = "";
+             
+            for (int j = word.length()-1; j >= 0; j--) 
+            {
+                reverseWord = reverseWord + word.charAt(j);
+            }
+             
+            reverseString = reverseString + reverseWord + " ";
+        }
+        for (int i = 0; i < n; i++) 
+        {
+            for (int j = i + 1; j < n; j++) 
+            {
+                if (words[i].compareTo(words[j])>0) 
+                {
+                   string  temp = words[i];
+                    words[i] = words[j];
+                    words[j] = temp;
+                }
+            }
+        }
+        
+        for (int i = 0; i < n - 1; i++) 
+        {
+            System.out.print(words[i] + ",");
+        }
+        System.out.print(words[n - 1]);
+    }
+}
+         
+        System.out.println(inputString);
+         
+        System.out.println(reverseString);
+         
+        System.out.println("-------------------------");
+    }
+     
+    public static void main(String[] args) 
+    {
+        reverseEachWordOfString("Java Concept Of The Day");
+         
+        reverseEachWordOfString("Java J2EE JSP Servlets Hibernate Struts");
+         
+        reverseEachWordOfString("I am string not reversed");
+         
+        reverseEachWordOfString("Reverse Me");
+        
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

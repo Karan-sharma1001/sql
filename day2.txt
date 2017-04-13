@@ -1,0 +1,63 @@
+package day1_1;
+import java.util.Scanner;
+public class chk {
+	public static void main(String[] args) {
+		Scanner n = new Scanner(System.in);
+		book b1= new book();
+		System.out.println("Enter Book No");
+		 int bookNo=n.nextInt();
+		 System.out.println("Enter Title");
+		 String title=n.next();
+		 System.out.println("Enter author");
+		 String author=n.next();
+		 System.out.println("Enter Price");
+		 float price=n.nextFloat();
+		 b1.setAuthor(author);
+		 b1.setBookNo(bookNo);
+		 b1.setPrice(price);
+		 b1.setTitle(title);
+		 b1.showBook();
+	}
+
+}
+
+
+package day1_1;
+
+public class book {
+	private int bookNo;
+	private String title;
+	private String author;
+	private float price;
+	public int getBookNo() {
+		return bookNo;
+	}
+	public void setBookNo(int bookNo) {
+		this.bookNo = bookNo;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getAuthor() {
+		return author;
+	}
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+	public float getPrice() {
+		return price;
+	}
+	public void setPrice(float price) {
+		this.price = price;
+	}
+	public void showBook() {
+		System.out.println("Book no : "+bookNo+"\nTitle is "+title+"\nAuthor is "+author+"\nPrice is "+price);
+	}
+
+}
+============================================================
+
+
