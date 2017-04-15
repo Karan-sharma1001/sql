@@ -1,0 +1,14 @@
+package day1_1;
+import java.util.*;
+public class tls {
+public static void main(String[] args) {
+	
+	Scanner sc = new Scanner(System.in);
+	//up casting
+	person p=new trainer(sc.next(), sc.next(), sc.next(), sc.nextInt(), sc.nextInt());
+//downcasting
+	trainer t = (trainer) p;
+	t.TrainerKaMethod();
+	
+}
+}
