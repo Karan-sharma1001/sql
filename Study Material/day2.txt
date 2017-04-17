@@ -1,0 +1,417 @@
+package day1_1;
+import java.util.Scanner;
+public class chk {
+	public static void main(String[] args) {
+		Scanner n = new Scanner(System.in);
+		book b1= new book();
+		System.out.println("Enter Book No");
+		 int bookNo=n.nextInt();
+		 System.out.println("Enter Title");
+		 String title=n.next();
+		 System.out.println("Enter author");
+		 String author=n.next();
+		 System.out.println("Enter Price");
+		 float price=n.nextFloat();
+		 b1.setAuthor(author);
+		 b1.setBookNo(bookNo);
+		 b1.setPrice(price);
+		 b1.setTitle(title);
+		 b1.showBook();
+	}
+
+}
+
+
+package day1_1;
+
+public class book {
+	private int bookNo;
+	private String title;
+	private String author;
+	private float price;
+	public int getBookNo() {
+		return bookNo;
+	}
+	public void setBookNo(int bookNo) {
+		this.bookNo = bookNo;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getAuthor() {
+		return author;
+	}
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+	public float getPrice() {
+		return price;
+	}
+	public void setPrice(float price) {
+		this.price = price;
+	}
+	public void showBook() {
+		System.out.println("Book no : "+bookNo+"\nTitle is "+title+"\nAuthor is "+author+"\nPrice is "+price);
+	}
+
+}
+============================================================
+package day1_1;
+
+public class book {
+	private int bookNo;
+	private String title;
+	private String author;
+	private float price;
+	private static  int bookCount;
+	public static int getBookCount( ){
+		return bookCount;
+	}
+	static {
+		bookCount=0;
+	}
+
+	public int getBookNo() {
+		return bookNo;
+	}
+	public void setBookNo(int bookNo) {
+		this.bookNo = bookNo;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getAuthor() {
+		return author;
+	}
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+	public float getPrice() {
+		return price;
+	}
+	public void setPrice(float price) {
+		this.price = price;
+	}
+	public void showBook() {
+		System.out.println("Book no : "+bookNo+"\nTitle is "+title+"\nAuthor is "+author+"\nPrice is "+price);
+	}
+	public book(int bN,String t,String a,int p){
+		if (p > 0 && p < 5000 && a.length( )>= 4 )
+		{	
+		bookNo=bN;
+		title=t;
+		author=a;
+		price=p;
+		bookCount++;
+		}
+	}
+	public book(){
+		bookCount++;
+		
+	}
+	@Override
+	public String toString() {
+		return "book [bookNo=" + bookNo + ", title=" + title + ", author="
+				+ author + ", price=" + price + "]";
+	}
+
+}
+
+
+
+package day1_1;
+import java.util.Scanner;
+public class chk {
+	public static void main(String[] args) {
+		Scanner n = new Scanner(System.in);
+		book b1[]= new book[3];
+		for (book book: b1) {
+			
+		
+		System.out.println("Enter Book No");
+		 int bookNo=n.nextInt();
+		 System.out.println("Enter Title");
+		 String title=n.next();
+		 System.out.println("Enter author");
+		 String author=n.next();
+		 System.out.println("Enter Price");
+		 float price=n.nextFloat();
+		
+		/* b1.setAuthor(author);
+		 b1.setBookNo(bookNo);
+		 b1.setPrice(price);
+		 b1.setTitle(title);
+		 b1.showBook();*/
+		 System.out.println(b1.toString());
+		 System.out.println(book.getBookCount());
+	}
+	}
+}
+
+
+
+========================================================
+
+
+
+
+
+
+=====================================================
+
+
+
+
+
+package day1_1;
+import java.util.Scanner;
+public class chk {
+	public static void main(String[] args) {
+		Scanner n = new Scanner(System.in);
+		book b1[ ]= new book[3];
+
+		for (int j = 0; j < b1.length; j++) {
+			
+			
+			System.out.println("Enter value for  "+j+" array");
+		b1[j]=new book();
+		System.out.println("Enter Book No");
+		 int bookNo=n.nextInt();
+		 System.out.println("Enter Title");
+		 String title=n.next();
+		 System.out.println("Enter author");
+		 String author=n.next();
+		 System.out.println("Enter Price");
+		 float price=n.nextFloat();
+		
+		 b1[j].setAuthor(author);
+		 b1[j].setBookNo(bookNo);
+		 b1[j].setPrice(price);
+		 b1[j].setTitle(title);
+		 b1[j].showBook();
+		 System.out.println(b1.toString());
+		 System.out.println(book.getBookCount());
+	}
+	}
+}
+
+
+
+
+===================================================
+
+5)
+
+package day1_1;
+import java.util.Scanner;
+public class chk {
+	public static void main(String[] args) {
+		Scanner n = new Scanner(System.in);
+		book b1[ ]= new book[3];
+
+		for (int j = 0; j < b1.length; j++) {
+			
+			
+			System.out.println("Enter value for  "+j+" array");
+		b1[j]=new book();
+		System.out.println("Enter Book No");
+		 int bookNo=n.nextInt();
+		 System.out.println("Enter Title");
+		 String title=n.next();
+		 System.out.println("Enter author");
+		 String author=n.next();
+		 System.out.println("Enter Price");
+		 float price=n.nextFloat();
+		
+		 b1[j].setAuthor(author);
+		 b1[j].setBookNo(bookNo);
+		 b1[j].setPrice(price);
+		 b1[j].setTitle(title);
+		 b1[j].showBook();
+		 System.out.println(b1.toString());
+		 System.out.println(book.getBookCount());
+	}
+		int[] a=new int[3];
+		System.out.println("Enter number to be search");
+		
+		int z=n.nextInt();
+		for (int i = 0; i < a.length; i++) {
+			a[i]=b1[i].getBookNo();
+			
+		}
+		int b=0;
+		for (int i = 0; i < a.length; i++) {
+			if (a[i]==z)
+			{
+				System.out.println("Book found  having book number "+z);
+				b=1;
+				break;
+			}
+		}
+	      	if ( b== 0) {
+				System.out.println("Book not found");
+		}
+	}
+}
+
+
+
+
+
+==========================================
+
+
+package day1_1;
+import java.util.Scanner;
+public class chk {
+	public static void main(String[] args) {
+		Scanner n = new Scanner(System.in);
+		book b1[ ]= new book[3];
+
+		for (int j = 0; j < b1.length; j++) {
+			
+			
+			System.out.println("Enter value for  "+j+" array");
+		b1[j]=new book();
+		System.out.println("Enter Book No");
+		 int bookNo=n.nextInt();
+		 System.out.println("Enter Title");
+		 String title=n.next();
+		 System.out.println("Enter author");
+		 String author=n.next();
+		 System.out.println("Enter Price");
+		 float price=n.nextFloat();
+		
+		 b1[j].setAuthor(author);
+		 b1[j].setBookNo(bookNo);
+		 b1[j].setPrice(price);
+		 b1[j].setTitle(title);
+		 b1[j].showBook();
+		 System.out.println(b1.toString());
+		 System.out.println(book.getBookCount());
+	}
+		int[] a=new int[3];
+		System.out.println("Enter number to be search");
+		
+		int z=n.nextInt();
+		for (int i = 0; i < a.length; i++) {
+			a[i]=b1[i].getBookNo();
+			
+		}
+		int b=0;
+		for (int i = 0; i < a.length; i++) {
+			if (a[i]==z)
+			{
+				System.out.println("Book found  having book number "+z);
+				b=1;
+				break;
+			}
+		}
+	      	if ( b== 0) {
+				System.out.println("Book not found");
+		}
+	      	
+	      	Engineeringbook f=new Engineeringbook("physics");
+	      	System.out.println(f.getCategory());
+	      	
+	}
+}
+
+
+
+
+
+
+
+
+package day1_1;
+
+public class book {
+	private int bookNo;
+	private String title;
+	private String author;
+	private float price;
+	private static  int bookCount;
+	
+	
+	static {
+		bookCount=3;
+	}
+
+	public int getBookNo() {
+		return bookNo;
+	}
+	public void setBookNo(int bookNo) {
+		this.bookNo = bookNo;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getAuthor() {
+		return author;
+	}
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+	public float getPrice() {
+		return price;
+	}
+	public void setPrice(float price) {
+		this.price = price;
+	}
+	public void showBook() {
+		System.out.println("Book no : "+bookNo+"\nTitle is "+title+"\nAuthor is "+author+"\nPrice is "+price);
+	}
+	public book(int bN,String t,String a,int p){
+		if (p > 0 && p < 5000 && a.length( )>= 4 )
+		{	
+		this.bookNo=bN;
+		this.title=t;
+		this.author=a;
+		this.price=p;
+		bookCount++;
+		}
+	}
+	
+	public book(){
+		bookCount++;
+		
+	}
+	@Override
+	public String toString() {
+		return "book [bookNo=" + bookNo + ", title=" + title + ", author="
+				+ author + ", price=" + price + "]";
+	}
+	public static int getBookCount( ){
+		return bookCount;
+	}
+
+}
+class Engineeringbook extends book{
+	private String category 	;
+	public Engineeringbook(){
+		
+	}
+
+public Engineeringbook(String g){
+		category=g;
+	}
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	
+}
+

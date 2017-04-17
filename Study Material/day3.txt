@@ -1,0 +1,92 @@
+package com.test;
+
+import com.shape.*;
+
+
+
+public class Testsquareandrect {
+
+	public static void main(String[] args) {
+		
+
+	Rectangle rec=new Rectangle();
+	Square squ =new Square();
+	rec.calcArea();
+	rec.calcPeri();
+	squ.calcArea();
+	squ.calcPeri();
+	
+	
+}
+}
+
+
+
+==============
+package com.shape;
+import java.util.*;
+
+public class Rectangle implements Polygon
+{
+	float length;
+	float breadth;
+	
+ Scanner s=new Scanner(System.in);
+	
+ public void  calcArea( ){
+	 System.out.println("enter length of rectangle");
+		float length=s.nextFloat();
+		System.out.println("enter breadth of rectangle");
+		
+		float breadth=s.nextFloat();
+		float a=length * breadth;
+		System.out.println("Area of Recangle is : "+a);
+	}
+
+ public void calcPeri( ){
+	 System.out.println("enter length of rectangle");
+		float length=s.nextFloat();
+		System.out.println("enter Breadth of rectangle");
+		float breadth=s.nextFloat();
+		float a=2*(length + breadth);
+		System.out.println("Perimeter of Rectangle is : "+a);
+	}
+
+
+}
+
+============================
+package com.shape;
+import java.util.*;
+public class Square implements Polygon {
+	float side ;
+	 Scanner s=new Scanner(System.in);
+	@Override
+	public void calcArea() {
+		System.out.println("enter side of rectangle");
+		side=s.nextFloat();
+		float a=side* side;
+		System.out.println("Area of Square is : "+a);
+
+	}
+
+	@Override
+	public void calcPeri() {
+		System.out.println("enter side of rectangle");
+		side=s.nextFloat();
+		float a=4* side;
+		System.out.println("Perimeter of Square is : "+a);
+	}
+
+}
+
+===================
+
+package com.shape;
+
+public interface Polygon {
+
+	public void  calcArea( );
+	public void calcPeri( );
+	
+}
